@@ -34,5 +34,9 @@
     "rgba(143, 236, 18, 0.7)",
     "rgba(174, 18, 236, 0.7)",
     "rgba(18, 34, 236, 0.7)"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "minimap.background": "#00000000",
+    "scrollbar.shadow": "#00000000"
+  }
 }
