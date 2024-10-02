@@ -1,11 +1,9 @@
-import PrimarySearchAppBar from '../../../components/common/navBar';
-
 export const Home = () => {
   return (
-    <>
-      <header>
-        <PrimarySearchAppBar />
-      </header>
-    </>
+    <div>
+      <h1 style={{ color: 'var(--text-teste)', marginLeft: '10px' }}>
+        Developer Community E-commerce!
+      </h1>
+    </div>
   );
 };
