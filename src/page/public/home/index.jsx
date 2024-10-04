@@ -8,10 +8,12 @@ export const Home = () => {
         <PrimarySearchAppBar />
       </header>
       <main>
-        <div class="exemplo">hello world</div>
+        <div class="exemplo">
+          <h1>CADÊ A MAIN VICTOR HUGOR ???????????</h1>
+        </div>
       </main>
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
     </>
   );

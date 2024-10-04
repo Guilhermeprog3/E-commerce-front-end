@@ -42,3 +42,10 @@
 *::-moz-scrollbar-track {
   background-color: #f1f1f1;
 }
+
+.exemplo {
+  background: #5c08aa;
+  margin-top: 5rem;
+  color: aliceblue;
+  text-align: center;
+}
