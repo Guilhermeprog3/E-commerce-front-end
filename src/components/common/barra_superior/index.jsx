@@ -6,7 +6,7 @@ export default function ItemCountBar() {
     <Box
       sx={{
         display: 'flex',
-        width:{lg:'97.5%',md:'95%',xl:'93%',sm:'100%',xs:'105%'},
+        width:{lg:'97.5%',md:'95%',xl:'93%',sm:'97%',xs:'98%'},
         marginLeft:{lg:'1%',md:'2%',xs:'1%'},
         alignItems: 'center',
         padding: '8px',

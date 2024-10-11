@@ -21,7 +21,7 @@ export default function FilterComponent() {
   };
 
   return (
-    <Box sx={{ width:{md:'100%',lg:'110%',xs:'88%',sm:'103%'}, }}>
+    <Box sx={{ width:{md:'100%',lg:'110%',xs:'90%',sm:'103%'}, }}>
 
       {/* Accordion principal: Categorias Personalizadas */}
       <Accordion expanded={mainExpanded} onChange={handleMainChange} sx={{ width: '100%' }}>
@@ -185,7 +185,7 @@ export default function FilterComponent() {
           name="rating"
           value={rating}
           onChange={(event, newValue) => setRating(newValue)}
-          sx={{ fontSize: '3rem' }}
+          sx={{ fontSize: {lg:'3rem',xs:'2rem'} }}
         />
       </Box>
     </Box>

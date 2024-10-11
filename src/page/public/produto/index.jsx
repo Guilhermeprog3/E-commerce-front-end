@@ -21,23 +21,23 @@ function Produto() {
 
       <Container
         sx={{
-          marginLeft:{lg:'10.3%',xl:'20.5%',md:'-4%',sm:'2%',xs:'-2%'},
+          marginLeft:{lg:'10.3%',xl:'20.5%',md:'-4%',sm:'30%',xs:'30%'},
           marginTop: '2%',
           display: 'flex',
-          width:{lg:'90%',md:'103%',xs:'20%'}
+          width:{lg:'90%',md:'103%',xs:'74%',sm:'71%'}
           
         }}
       >
         
-        <Box sx={{ flex: 1, marginLeft:{lg:'-13%',md:'4%',xl:'-29%',xs:'-20%'},marginRight:{lg:'7%',sm:"75%",md:'5%'} }}>
+        <Box sx={{ flex: 1, marginLeft:{lg:'-13%',md:'4%',xl:'-29%',xs:'-50%'},marginRight:{lg:'7%',sm:"2%",md:'5%',xs:'-5%'} }}>
           <FilterComponent />
         </Box>
 
         
-        <Box sx={{ flex: 3 }}>
+        <Box sx={{ flex: 3, }}>
           <Grid container spacing={2}>
             {products.map((product, index) => (
-              <Grid item xs={25} sm={25} md={4} lg={4} key={index}>
+              <Grid item xs={18} sm={6} md={4} lg={4} key={index}>
                 <ProductCard />
               </Grid>
             ))}
@@ -47,10 +47,11 @@ function Produto() {
           <Box
             sx={{
               position: 'relative',
-              marginTop:'5%',
-              marginBottom:"5%",
+              marginTop:{lg:'5%',xs:'15%',sm:'8%'},
+              marginBottom:{lg:'5%',xs:'15%',sm:'8%'},
               display: 'flex',
               justifyContent: 'center',
+              marginLeft:'50%'
             }}
           >
             <PaginationRounded />
