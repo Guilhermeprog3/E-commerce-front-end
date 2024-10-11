@@ -23,7 +23,7 @@ export default function OrderReview() {
     <Box
       sx={{
         width: { xs: '133%', md: '495%', lg: '159%', xl: '150%', sm: '300%' },
-        marginLeft: { lg: '21%', xl: '42%', md: '-140%',xl:'35%'},
+        marginLeft: { lg: '21%', md: '-140%',xl:'35%'},
         marginTop:{lg:'-5%',xl:'-5%',sm:'-5%',xs:'-5%',md:'-20%'},
         display: 'flex',
         position: 'relative',
@@ -44,7 +44,7 @@ export default function OrderReview() {
             color: 'white', 
             fontWeight: 'bold', 
             marginBottom: { xs: '1rem', md: '1.5rem' },
-            fontSize: { sm: '2rem', md: '1rem',lg:'2rem' } // Tamanho da fonte aumentado para sm e md
+            fontSize: { sm: '2rem', md: '1rem',lg:'2rem' } 
           }}
         >
           Revisão do Pedido
@@ -56,8 +56,8 @@ export default function OrderReview() {
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRYD9KS0ToW13xEUyGxqsjW4p7nnGs__TrBw&s"
                 alt="Produto"
                 style={{
-                width: '35%', // Mantém a proporção da imagem
-                height: '75%', // Define um tamanho máximo razoável para a altura
+                width: '35%',
+                height: '75%',
                 marginRight: 16,
                 }}
 />
@@ -67,7 +67,7 @@ export default function OrderReview() {
                   variant="body1" 
                   sx={{ 
                     color: 'white', 
-                    fontSize: { sm: '2rem', md: '1rem',lg:'1.3rem',marginBottom:'3%' } // Aumentando a fonte para sm e md
+                    fontSize: { sm: '2rem', md: '1rem',lg:'1.3rem',marginBottom:'3%' }
                   }}
                 >
                   Produto: Smartphone X
@@ -76,7 +76,7 @@ export default function OrderReview() {
                   variant="body1" 
                   sx={{ 
                     color: 'white',
-                    fontSize: { sm: '2rem', md: '1rem',lg:'1.3rem' } // Aumentando a fonte para sm e md
+                    fontSize: { sm: '2rem', md: '1rem',lg:'1.3rem' }
                   }}
                 >
                   Preço: R$ 3.000,00
@@ -86,28 +86,28 @@ export default function OrderReview() {
                     display: 'flex', 
                     alignItems: 'center', 
                     marginTop: 1, 
-                    fontSize: { sm: '3rem', md: '1rem',lg:'1.3rem' },marginBottom:'3%' // Aumentando o tamanho geral para sm e md
+                    fontSize: { sm: '3rem', md: '1rem',lg:'1.3rem' },marginBottom:'3%'
                   }}
                 >
                   <IconButton 
                     onClick={handleDecrement} 
                     sx={{ 
                       color: 'white', 
-                      fontSize: { sm: '2rem', md: '1rem',lg:'1.3rem' } // Aumentando o tamanho do ícone de remoção
+                      fontSize: { sm: '2rem', md: '1rem',lg:'1.3rem' }
                     }}
                   >
-                    <RemoveIcon fontSize="inherit" /> {/* Adicionando fontSize="inherit" para pegar o tamanho do ícone */}
+                    <RemoveIcon fontSize="inherit" /> 
                   </IconButton>
 
                   <TextField
                     value={quantity}
                     inputProps={{ 
                       min: 1, 
-                      style: { textAlign: 'center', color: 'white', fontSize: { sm: '2rem', md: '3rem' ,lg:'1.5rem'} } // Aumentando o tamanho da fonte no campo de texto
+                      style: { textAlign: 'center', color: 'white', fontSize: { sm: '2rem', md: '3rem' ,lg:'1.5rem'} } 
                     }}
                     sx={{
-                      width: { sm: 60, md: 80 }, // Aumentando a largura do campo de texto
-                      '& .MuiInputBase-input': { padding: '8px' }, // Ajustando o padding do campo de texto
+                      width: { sm: 60, md: 80 },
+                      '& .MuiInputBase-input': { padding: '8px' }, 
                       '& .MuiOutlinedInput-root': { backgroundColor: '#334155' }
                     }}
                   />
@@ -134,7 +134,7 @@ export default function OrderReview() {
               color: 'white', 
               marginTop: { xs: 1, md: 2, sm: 5 }, 
               marginLeft: { sm: '-20%',lg:'-5%',md:'4%'},
-              fontSize: { sm: '2rem', md: '1.5rem',lg:'1.5rem' } // Aumentando o tamanho da fonte para sm e md
+              fontSize: { sm: '2rem', md: '1.5rem',lg:'1.5rem' }
             }}
           >
             TOTAL
@@ -150,7 +150,7 @@ export default function OrderReview() {
               padding: '0.5rem 0',
               marginTop: '0.5rem',
               width: { sm: '50%',lg:'70%' },
-              fontSize: { sm: '2rem', md: '1rem',lg:'1.5rem' }, // Aumentando o tamanho da fonte para sm e md
+              fontSize: { sm: '2rem', md: '1rem',lg:'1.5rem' },
               marginLeft:{sm:'14%',lg:'12%',md:'25%'},
             }}
           >
@@ -165,7 +165,7 @@ export default function OrderReview() {
               color: '#FFFFFF',
               marginTop: '2rem',
               width: { sm: '50%',lg:'70%',xs:'100%' },
-              fontSize: { sm: '1.5rem', md: '1rem',lg:'1.5rem',xs:'1.5rem' }, // Aumentando a fonte do botão para sm e md
+              fontSize: { sm: '1.5rem', md: '1rem',lg:'1.5rem',xs:'1.5rem' }, 
               marginLeft: { sm: '14%',lg:'12%',md:'25%' },
             }}
           >
@@ -177,7 +177,7 @@ export default function OrderReview() {
               variant="body2" 
               sx={{ 
                 color: 'white',
-                fontSize: { sm: '1.5rem', md: '0.9rem',lg:'1.1rem',xs:'1rem' } // Aumentando a fonte para sm e md
+                fontSize: { sm: '1.5rem', md: '0.9rem',lg:'1.1rem',xs:'1rem' }
               }}
             >
               CONFIRME SEUS DADOS DE 
@@ -187,7 +187,7 @@ export default function OrderReview() {
               sx={{ 
                 color: '#91EE82', 
                 marginLeft: 0.5,
-                fontSize: { sm: '1.5rem', md: '0.9rem',lg:'1.1rem',xs:'1rem' } // Aumentando a fonte para sm e md
+                fontSize: { sm: '1.5rem', md: '0.9rem',lg:'1.1rem',xs:'1rem' } 
               }}
             >
               ENTREGA
