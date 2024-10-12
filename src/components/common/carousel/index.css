@@ -1,0 +1,7 @@
+.swiper-pagination-bullet {
+  background-color: #787e85; /* Cor inicial das bolinhas */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #8b96a5; /* Cor das bolinhas ativas */
+}
