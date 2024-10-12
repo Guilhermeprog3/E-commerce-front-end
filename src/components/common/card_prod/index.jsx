@@ -20,7 +20,7 @@ function ProductCard() {
       />
 
       <Box sx={{ backgroundColor: '#4B5563', padding: '2px', textAlign: 'center' }}>
-        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: '#000' }}>
+        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: '#000',fontSize:{lg:'1.3rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}}>
           Smartphone Pro Max
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '2px' }}>
@@ -32,7 +32,7 @@ function ProductCard() {
             value={rating} 
             precision={0.5} 
             readOnly
-            sx={{ color: '#FFD700' }} 
+            sx={{ color: '#FFD700',fontSize:{lg:'1.5rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}} 
           />
         </Box>
       </Box>

@@ -21,10 +21,10 @@ function Produto() {
 
       <Container
         sx={{
-          marginLeft:{lg:'10.3%',xl:'20.5%',md:'-4%',sm:'30%',xs:'30%'},
+          marginLeft:{lg:'10.3%',xl:'20.5%',md:'-4%',sm:'30%',xs:'28%'},
           marginTop: '2%',
           display: 'flex',
-          width:{lg:'90%',md:'103%',xs:'74%',sm:'71%'}
+          width:{lg:'90%',md:'103%',xs:'72%',sm:'70%'}
           
         }}
       >
