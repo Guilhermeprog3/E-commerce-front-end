@@ -23,8 +23,11 @@ export default function OrderReview() {
     <Box
       sx={{
         width: { xs: '133%', md: '495%', lg: '159%', xl: '150%', sm: '300%' },
+ Home_Main
         marginLeft: { lg: '21%', xl: '42%', md: '-140%', xl: '35%' },
         marginTop: { lg: '-5%', xl: '-5%', sm: '-5%', xs: '-5%', md: '-20%' },
+
+      
         display: 'flex',
         position: 'relative',
         padding: { xs: 1, md: 2 },
@@ -43,6 +46,7 @@ export default function OrderReview() {
             color: 'white',
             fontWeight: 'bold',
             marginBottom: { xs: '1rem', md: '1.5rem' },
+
             fontSize: { sm: '2rem', md: '1rem', lg: '2rem' }, // Tamanho da fonte aumentado para sm e md
           }}>
           Revisão do Pedido
@@ -103,6 +107,7 @@ export default function OrderReview() {
                       {/* Adicionando fontSize="inherit" para pegar o tamanho do ícone */}
                     </IconButton>
 
+
                     <TextField
                       value={quantity}
                       inputProps={{
@@ -142,6 +147,7 @@ export default function OrderReview() {
               marginLeft: { sm: '-20%', lg: '-5%', md: '4%' },
               fontSize: { sm: '2rem', md: '1.5rem', lg: '1.5rem' }, // Aumentando o tamanho da fonte para sm e md
             }}>
+
             TOTAL
           </Typography>
           <Typography
@@ -154,10 +160,12 @@ export default function OrderReview() {
               textAlign: 'center',
               padding: '0.5rem 0',
               marginTop: '0.5rem',
+
               width: { sm: '50%', lg: '70%' },
               fontSize: { sm: '2rem', md: '1rem', lg: '1.5rem' }, // Aumentando o tamanho da fonte para sm e md
               marginLeft: { sm: '14%', lg: '12%', md: '25%' },
             }}>
+
             R$ {totalPrice.toFixed(2)}
           </Typography>
 
@@ -168,10 +176,12 @@ export default function OrderReview() {
               backgroundColor: 'black',
               color: '#FFFFFF',
               marginTop: '2rem',
+
               width: { sm: '50%', lg: '70%', xs: '100%' },
               fontSize: { sm: '1.5rem', md: '1rem', lg: '1.5rem', xs: '1.5rem' }, // Aumentando a fonte do botão para sm e md
               marginLeft: { sm: '14%', lg: '12%', md: '25%' },
             }}>
+
             COMPRAR
           </Button>
 
@@ -187,17 +197,19 @@ export default function OrderReview() {
               variant="body2"
               sx={{
                 color: 'white',
+<
                 fontSize: { sm: '1.5rem', md: '0.9rem', lg: '1.1rem', xs: '1rem' }, // Aumentando a fonte para sm e md
               }}>
-              CONFIRME SEUS DADOS DE
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: '#91EE82',
-                marginLeft: 0.5,
+              CONFIRME SEUS DADOS
+                fontSize: { sm: '1.5rem', md: '0.9rem',lg:'1.1rem',xs:'1rem' }
+              }}
+            >
+              CONFIRME SEUS DADOS DE 
+
+
                 fontSize: { sm: '1.5rem', md: '0.9rem', lg: '1.1rem', xs: '1rem' }, // Aumentando a fonte para sm e md
               }}>
+
               ENTREGA
             </Typography>
           </Box>

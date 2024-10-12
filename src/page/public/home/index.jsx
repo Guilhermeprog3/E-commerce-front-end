@@ -4,28 +4,34 @@ import Banner from '../../../components/common/banner';
 import ProductforYou from '../../../components/common/product_for_you';
 import Carousel from '../../../components/common/carousel';
 import Product from '../../../components/common/product';
+
+
 export const Home = () => {
   return (
     <>
+    
       <header>
         <PrimarySearchAppBar />
       </header>
       <main>
+
         <div style={{ marginTop: '90px' }}>
-          <Banner />
+            <Banner />
         </div>
         <div style={{ marginTop: '70px' }}>
-          <ProductforYou />
+           <ProductforYou />
         </div>
         <div style={{ marginTop: '10px', marginBottom: '50px' }}>
-          <Carousel />
+            <Carousel />
         </div>
         <div style={{ marginTop: '10px', marginBottom: '50px' }}>
-          <Product />
-        </div>
+            <Product />
+  
+         </div>
       </main>
+
       <footer>
-        <Footer />
+          <Footer />
       </footer>
     </>
   );
