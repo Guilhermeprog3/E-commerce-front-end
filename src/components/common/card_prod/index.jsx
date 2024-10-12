@@ -3,7 +3,7 @@ import { Card, CardContent, CardMedia, Typography, Button, Box, Rating, Divider 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function ProductCard() {
-  
+
   const rating = 4.5;
 
   return (
@@ -20,11 +20,11 @@ function ProductCard() {
       />
 
       <Box sx={{ backgroundColor: '#4B5563', padding: '2px', textAlign: 'center' }}>
-        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: '#000',fontSize:{lg:'1.3rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}}>
+        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: '#000', fontSize:{lg:'1.3rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}}>
           Smartphone Pro Max
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '2px' }}>
-          <Typography variant="body1" component="div" sx={{ fontWeight: 'bold', color: '#000', }}>
+          <Typography variant="body1" component="div" sx={{ fontWeight: 'bold', color: '#000' }}>
             R$ 3.499,00
           </Typography>
           <Rating 
@@ -32,7 +32,7 @@ function ProductCard() {
             value={rating} 
             precision={0.5} 
             readOnly
-            sx={{ color: '#FFD700',fontSize:{lg:'1.5rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}} 
+            sx={{ color: '#FFD700', fontSize:{lg:'1.5rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}} 
           />
         </Box>
       </Box>
@@ -49,7 +49,16 @@ function ProductCard() {
       <Box display="flex" justifyContent="center" mb={2}>
         <Button 
           variant="contained" 
-          sx={{ backgroundColor: '#fff', color: '#000', fontWeight: 'bold', width: '50%' }}
+          sx={{
+            backgroundColor: '#fff', 
+            color: '#000', 
+            fontWeight: 'bold', 
+            width: '50%',
+            '&:hover': { 
+              backgroundColor: '#4B5563', // Muda para cinza escuro ao passar o mouse
+              color: '#fff' // Cor do texto muda para branco
+            }
+          }}
           startIcon={<ShoppingCartIcon />}
         >
           COMPRA
