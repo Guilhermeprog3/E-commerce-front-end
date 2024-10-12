@@ -55,8 +55,8 @@ function ProductCard() {
             fontWeight: 'bold', 
             width: '50%',
             '&:hover': { 
-              backgroundColor: '#4B5563', // Muda para cinza escuro ao passar o mouse
-              color: '#fff' // Cor do texto muda para branco
+              backgroundColor: '#4B5563',
+              color: '#fff'
             }
           }}
           startIcon={<ShoppingCartIcon />}

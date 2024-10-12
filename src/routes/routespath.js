@@ -3,6 +3,8 @@ import Checkout from '../page/public/checkout';
 import { pagamentoSim } from '../page/pagamentoOk';
 import Produto from '../page/public/produto';
 import { pagamentoRec } from '../page/pagamentoREC';
+import Login from '../page/public/login';
+import Cadastro from '../page/public/cadastro';
 
 
 export const RoutesPath = {
@@ -12,6 +14,8 @@ export const RoutesPath = {
   '/checkout': Checkout,
   '/produto':Produto,
   '/pagamento_rec': pagamentoRec,
+  '/login':Login,
+  '/cadastro':Cadastro,
 
 
 };
