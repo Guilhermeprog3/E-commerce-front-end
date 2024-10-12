@@ -3,8 +3,8 @@ import { Box, TextField, Button, Typography, Checkbox, FormControlLabel, Link, I
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const P_Cadastro = () => {
-  const [showPassword, setShowPassword] = useState(false);  // Controle para mostrar ou ocultar a senha
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Controle para mostrar ou ocultar a senha de confirmação
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleClickShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
@@ -64,7 +64,7 @@ const P_Cadastro = () => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={handleClickShowPassword}  // Alterna a visibilidade da senha
+                onClick={handleClickShowPassword} 
                 edge="end"
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -76,7 +76,7 @@ const P_Cadastro = () => {
 
       <TextField
         label="Confirme Sua senha"
-        type={showConfirmPassword ? 'text' : 'password'}  // Altera entre 'text' e 'password'
+        type={showConfirmPassword ? 'text' : 'password'} 
         variant="outlined"
         fullWidth
         margin="normal"
@@ -85,7 +85,7 @@ const P_Cadastro = () => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={handleClickShowConfirmPassword}  // Alterna a visibilidade da senha de confirmação
+                onClick={handleClickShowConfirmPassword} 
                 edge="end"
               >
                 {showConfirmPassword ? <VisibilityOff /> : <Visibility />}

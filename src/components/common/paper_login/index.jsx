@@ -3,7 +3,7 @@ import { Box, TextField, Button, Typography, Checkbox, FormControlLabel, Link, I
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const P_Login = () => {
-  const [showPassword, setShowPassword] = useState(false);  // Controle para mostrar ou ocultar a senha
+  const [showPassword, setShowPassword] = useState(false); 
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
@@ -50,7 +50,7 @@ const P_Login = () => {
 
       <TextField 
         label="Sua senha" 
-        type={showPassword ? 'text' : 'password'}  // Alterna entre 'text' e 'password'
+        type={showPassword ? 'text' : 'password'}
         variant="outlined" 
         fullWidth 
         margin="normal" 
@@ -59,7 +59,7 @@ const P_Login = () => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                onClick={handleClickShowPassword}  // Alterna a visibilidade da senha
+                onClick={handleClickShowPassword} 
                 edge="end"
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -86,7 +86,7 @@ const P_Login = () => {
           width: '50%',
           marginLeft: '25%',
           '&:hover': {
-            backgroundColor: '#4B5563',  // Cor ao passar o mouse
+            backgroundColor: '#4B5563', 
           }
         }}
       >
