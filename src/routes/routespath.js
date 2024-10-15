@@ -5,6 +5,7 @@ import Produto from '../page/public/produto';
 import { pagamentoRec } from '../page/pagamentoREC';
 import Login from '../page/public/login';
 import Cadastro from '../page/public/cadastro';
+import { Error } from '../page/public/ERROR';
 
 
 export const RoutesPath = {
@@ -12,10 +13,11 @@ export const RoutesPath = {
   '/': Home,
   '/pagamento_ok': pagamentoSim,
   '/checkout': Checkout,
-  '/produto':Produto,
+  '/produto': Produto,
   '/pagamento_rec': pagamentoRec,
-  '/login':Login,
-  '/cadastro':Cadastro,
+  '/login': Login,
+  '/cadastro': Cadastro,
+  '/*': Error
 
 
 };
