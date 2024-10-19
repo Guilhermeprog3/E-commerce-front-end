@@ -44,7 +44,7 @@ const P_Login = () => {
         localStorage.setItem('token', response.data.access_token);
 
         // Redireciona para a página desejada (por exemplo, dashboard)
-        navigate('/dashboard');
+        navigate('/');
       } else {
         console.log('Erro no login:', response.data.message);
         setErrorMessage(response.data.message);
