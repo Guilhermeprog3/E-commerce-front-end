@@ -11,12 +11,15 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import axios from 'axios'; // Importa o Axios
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Importa o hook de navegação
 
 const P_Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate(); // Inicia o hook de navegação
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
@@ -36,22 +39,27 @@ const P_Login = () => {
       if (response.status === 200) {
         // Sucesso no login
         console.log('Login bem-sucedido:', response.data);
-        // Aqui você pode redirecionar o usuário ou armazenar o token de autenticação
+
+        // Armazena o token no localStorage
+        localStorage.setItem('token', response.data.access_token);
+
+        // Redireciona para a página desejada (por exemplo, dashboard)
+        navigate('/dashboard');
       } else {
-        // Se houver algum erro inesperado
         console.log('Erro no login:', response.data.message);
+        setErrorMessage(response.data.message);
       }
     } catch (error) {
       // Tratamento de erro
       if (error.response) {
-        // Erros de resposta da API (código de status fora do 2xx)
         console.log('Erro no login:', error.response.data.message);
+        setErrorMessage(error.response.data.message);
       } else if (error.request) {
-        // Erros de requisição (sem resposta da API)
         console.log('Erro de rede:', error.request);
+        setErrorMessage('Erro de rede, tente novamente mais tarde.');
       } else {
-        // Outro tipo de erro
         console.log('Erro:', error.message);
+        setErrorMessage('Erro desconhecido, tente novamente.');
       }
     }
   };
@@ -93,6 +101,16 @@ const P_Login = () => {
           gutterBottom>
           Verifique seu e-mail para confirmar.
         </Typography>
+
+        {errorMessage && (
+          <Typography
+            variant="body1"
+            color="red"
+            sx={{ textAlign: 'center' }}
+            gutterBottom>
+            {errorMessage}
+          </Typography>
+        )}
 
         <TextField
           label="Seu Email"
