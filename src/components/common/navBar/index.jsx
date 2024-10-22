@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,6 +14,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom'; // Para redirecionamento
+import { AuthContext } from '../../../context/authContext'; // Contexto de autenticação
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,6 +57,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const { signOut } = useContext(AuthContext); // Função para deslogar
+  const navigate = useNavigate(); // Hook para redirecionamento
+
   const isMenuOpen = Boolean(anchorEl);
   const isMoreMenuOpen = Boolean(menuAnchorEl);
 
@@ -69,6 +74,11 @@ export default function PrimarySearchAppBar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     setMenuAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    signOut(); // Chama a função de logout do AuthContext
+    navigate('/'); // Redireciona para a tela de login
   };
 
   return (
@@ -139,7 +149,7 @@ export default function PrimarySearchAppBar() {
         sx={{ mt: '5px', ml: '15px' }}>
         <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
         <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
+        <MenuItem onClick={handleLogout}>Sair</MenuItem> {/* Botão de Sair */}
       </Menu>
       <Menu
         anchorEl={menuAnchorEl}
@@ -150,7 +160,7 @@ export default function PrimarySearchAppBar() {
         <MenuItem onClick={handleMenuClose}>Carrinho</MenuItem>
         <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
         <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
+        <MenuItem onClick={handleLogout}>Sair</MenuItem> {/* Botão de Sair */}
       </Menu>
     </Box>
   );
