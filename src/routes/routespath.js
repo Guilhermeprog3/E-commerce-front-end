@@ -8,18 +8,26 @@ import Cadastro from '../page/public/cadastro';
 import { Error } from '../page/public/ERROR';
 import Usuario from '../page/public/Usuario';
 
-
-export const RoutesPath = {
-
-  '/': Home,
+export const PrivateRoutesPath = {
+  '/home': Home,
   '/pagamento_ok': pagamentoSim,
   '/checkout': Checkout,
   '/produto': Produto,
-  '/pagamento_rec': pagamentoRec,
-  '/login': Login,
+
+
+  '/usuario': Usuario,
+};
+
+export const RoutesPath = {
+
+  // '/': Home,
+  // '/pagamento_ok': pagamentoSim,
+  // '/checkout': Checkout,
+  // '/produto': Produto,
+  // '/pagamento_rec': pagamentoRec,
+  '/': Login,
   '/cadastro': Cadastro,
   '/*': Error,
-  '/usuario':Usuario,
-
-
-};
+  // '/usuario':Usuario,
+  '/pagamento_rec': pagamentoRec,
+}

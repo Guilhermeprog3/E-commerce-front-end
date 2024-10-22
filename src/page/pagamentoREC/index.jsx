@@ -11,21 +11,20 @@ export const pagamentoRec = () => {
             marginTop: '5rem',
           }}
           className="icone-checklist">
-          <Typography
+          <CancelIcon
             sx={{
               color: 'red',
               fontSize: '350px',
               right: '350px',
-            }}>
-            ERRO 404
-          </Typography>
+            }}
+          />
         </div>
         <div className="text-main">
           <div style={{ fontFamily: 'Arial', fontWeight: 500, textAlign: 'center' }}>
             <Typography
               variant="h5"
               gutterBottom>
-              COMPRA RECUSADA
+              PAGAMENTO RECUSADO !
             </Typography>
           </div>
         </div>
