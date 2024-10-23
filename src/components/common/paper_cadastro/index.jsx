@@ -221,7 +221,7 @@ const P_Cadastro = () => {
         style={{ marginTop: 10, fontSize: '1rem' }}>
         E-mail já Cadastrado? Faça{' '}
         <Link
-          href="/login"
+          href="/"
           color="#286909"
           style={{ fontSize: '1rem' }}>
           Login.
