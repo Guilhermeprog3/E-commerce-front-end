@@ -161,7 +161,8 @@ const P_Login = () => {
         </Box>
       </Box>
     );
-  }
-};
+  }  } else {
+    return <Navigate to="/home" />
+  };
 
 export default P_Login;
