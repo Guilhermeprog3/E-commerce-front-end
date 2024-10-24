@@ -33,8 +33,7 @@ const P_Login = () => {
       await signIn(data);
     } catch (error) {
       console.error('Erro ao fazer login:', error);
-    } finally {
-    }
+    } 
   };
   if (!signed) {
     return (
@@ -162,8 +161,6 @@ const P_Login = () => {
         </Box>
       </Box>
     );
-  } else {
-    return <Navigate to="/home" />;
   }
 };
 
