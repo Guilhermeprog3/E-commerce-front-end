@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-  baseURL: 'https://e-commerce-back-end-nestjs.onrender.com/', // API URL
+  baseURL: import.meta.env.VITE_BASE_URL,
 
 })
 
