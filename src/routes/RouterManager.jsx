@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useMemo } from 'react';
 import { PrivateRoutesPath, RoutesPath } from './routespath';
 import { PrivateRoute } from './PrivateRoutes';
+
 export const RouterManager = () => {
   const privateRoutes = useMemo(
     () =>
@@ -10,7 +11,6 @@ export const RouterManager = () => {
         return (
           <Route
             key={path}
-            path={path}
             element={<PrivateRoute />}>
             <Route
               path={path}
@@ -35,11 +35,15 @@ export const RouterManager = () => {
       }),
     []
   );
-  const routes = privateRoutes.concat(publicRoutes);
+
 
   return (
     <BrowserRouter>
-      <Routes>{routes}</Routes>
+      <Routes>
+        {privateRoutes}
+        {publicRoutes}
+      </Routes>
     </BrowserRouter>
   );
 };
+

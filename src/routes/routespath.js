@@ -10,24 +10,15 @@ import Usuario from '../page/public/Usuario';
 
 export const PrivateRoutesPath = {
   '/home': Home,
-  '/pagamento_ok': pagamentoSim,
-  '/checkout': Checkout,
+  '/carrinho': Checkout,
   '/produto': Produto,
-
-
   '/usuario': Usuario,
 };
 
 export const RoutesPath = {
-
-  // '/': Home,
-  // '/pagamento_ok': pagamentoSim,
-  // '/checkout': Checkout,
-  // '/produto': Produto,
-  // '/pagamento_rec': pagamentoRec,
   '/': Login,
   '/cadastro': Cadastro,
-  '/*': Error,
-  // '/usuario':Usuario,
+  '/pagamento_ok': pagamentoSim,
   '/pagamento_rec': pagamentoRec,
+  '/*': Error,
 }
