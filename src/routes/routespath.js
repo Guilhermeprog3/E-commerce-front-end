@@ -7,6 +7,7 @@ import Login from '../page/public/login';
 import Cadastro from '../page/public/cadastro';
 import { Error } from '../page/public/ERROR';
 import Usuario from '../page/public/Usuario';
+import Adc_Produto from '../page/public/adc_Produto';
 
 export const PrivateRoutesPath = {
   '/home': Home,
@@ -30,4 +31,5 @@ export const RoutesPath = {
   '/*': Error,
   // '/usuario':Usuario,
   '/pagamento_rec': pagamentoRec,
+  '/adc_Produto': Adc_Produto,
 }
