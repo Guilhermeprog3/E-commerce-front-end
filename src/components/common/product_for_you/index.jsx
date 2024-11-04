@@ -13,6 +13,7 @@ export default function ProductForYou() {
   const [products, setProducts] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
+  const [messageError, setMessageError] = React.useState('')
   
   React.useEffect(() =>{
     setLoading(true)
@@ -21,7 +22,8 @@ export default function ProductForYou() {
       (dados) =>{
         setProducts(dados.data.data)
       } 
-    ).catch((error) =>{
+    ).catch((erro) =>{
+      setMessageError(erro)
       setError(true)
     }).finally(() => {
       setLoading(false)
@@ -31,6 +33,12 @@ export default function ProductForYou() {
     if (loading) {
     return (
       <CircularIndeterminate/>
+    );
+  }
+  
+    if (error) {
+    return (
+      <p>{messageError}</p>
     );
   }
 
@@ -74,12 +82,12 @@ export default function ProductForYou() {
               <Typography
                 variant="body2"
                 sx={{ color: 'text.secondary' }}>
-                {product.description}
+                {product.description.length > 80  ? product.description.slice(0, 70) + "..."  : product.description}
               </Typography>
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
                 <Typography sx={{ color: 'black', fontWeight: 'bold', fontSize: '1.5rem' }}>
-                  R${parseFloat(product.price).toFixed(2)}
+                  R${parseFloat(product.price).toFixed(2).replace('.', ',')}
                 </Typography>
                 <Typography
                   sx={{
