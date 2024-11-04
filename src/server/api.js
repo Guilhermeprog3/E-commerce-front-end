@@ -21,3 +21,8 @@ export async function PostCart() {
   const response = await axiosClient.post("/carrinhos")
   return response
 }
+
+export async function PatchCart(id) {
+  const response = await axiosClient.patch("/carrinhos/${id}")
+  return response
+}
