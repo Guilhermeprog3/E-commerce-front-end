@@ -18,3 +18,13 @@ export default async function PostProduto(data) {
     throw error;
   }
 }
+
+export async function GetProdutosForYou() {
+  const response = await axiosClient.get("/produtos?page=1&pageSize=4")
+  return response
+}
+
+export async function PostCart() {
+  const response = await axiosClient.post("/carrinhos")
+  return response
+}
