@@ -1,22 +1,23 @@
 import { createContext, useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
 import { axiosClient } from '../server/api';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null); // Alterado para usar apenas o token
+  const [token, setToken] = useState(localStorage.getItem('@Auth:token') || null);
+
+
+  const signed = !!token;
 
   useEffect(() => {
-    const loadingStoreData = () => {
-      const storageToken = localStorage.getItem('@Auth:token');
-
-      if (storageToken) {
-        setToken(storageToken);
-        axiosClient.defaults.headers.common['Authorization'] = `Bearer ${storageToken}`; // Definindo o token no header
+    const loadStoredToken = () => {
+      const storedToken = localStorage.getItem('@Auth:token');
+      if (storedToken) {
+        setToken(storedToken);
+        axiosClient.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
       }
     };
-    loadingStoreData();
+    loadStoredToken();
   }, []);
 
   const signIn = async ({ email, password }) => {
@@ -26,19 +27,18 @@ export const AuthProvider = ({ children }) => {
         alert(response.data.error);
       } else {
         const accessToken = response.data.access_token;
-        setToken(accessToken); // Armazenando o token no estado
+        setToken(accessToken);
         axiosClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
-        localStorage.setItem('@Auth:token', accessToken); // Armazenando apenas o token no localStorage
+        localStorage.setItem('@Auth:token', accessToken);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao fazer login:", error);
     }
   };
 
   const signOut = () => {
     localStorage.clear();
-    setToken(null); // Limpando o token
+    setToken(null);
   };
 
   return (
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
         token,
         signIn,
         signOut,
-        signed: !!token, // A verificação de autenticação é baseada na existência do token
+        signed,
       }}>
       {children}
     </AuthContext.Provider>

@@ -11,25 +11,16 @@ import Adc_Produto from '../page/public/adc_Produto';
 
 export const PrivateRoutesPath = {
   '/home': Home,
-  '/pagamento_ok': pagamentoSim,
-  '/checkout': Checkout,
+  '/carrinho': Checkout,
   '/produto': Produto,
-
-
   '/usuario': Usuario,
+  '/adc_Produto': Adc_Produto,
 };
 
 export const RoutesPath = {
-
-  // '/': Home,
-  // '/pagamento_ok': pagamentoSim,
-  // '/checkout': Checkout,
-  // '/produto': Produto,
-  // '/pagamento_rec': pagamentoRec,
   '/': Login,
   '/cadastro': Cadastro,
-  '/*': Error,
-  // '/usuario':Usuario,
+  '/pagamento_ok': pagamentoSim,
   '/pagamento_rec': pagamentoRec,
-  '/adc_Produto': Adc_Produto,
+  '/*': Error,
 }
