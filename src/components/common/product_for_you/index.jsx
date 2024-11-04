@@ -6,47 +6,42 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
+import { GetProdutosForYou } from '../../../server/api';
+import CircularIndeterminate from '../circularIndeterminate';
 
 export default function ProductForYou() {
-  const products = [
-    {
-      id: 1,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação.',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
+  const [products, setProducts] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(false)
+  const [messageError, setMessageError] = React.useState('')
+  
+  React.useEffect(() =>{
+    setLoading(true)
+    const response = GetProdutosForYou()
+    response.then(
+      (dados) =>{
+        setProducts(dados.data.data)
+      } 
+    ).catch((erro) =>{
+      setMessageError(erro)
+      setError(true)
+    }).finally(() => {
+      setLoading(false)
+    })
+  }, [])
 
-    {
-      id: 2,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação.',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 3,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação.',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 4,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação.',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-  ];
+    if (loading) {
+    return (
+      <CircularIndeterminate/>
+    );
+  }
+  
+    if (error) {
+    return (
+      <p>{messageError}</p>
+    );
+  }
+
 
   return (
     <Box sx={{ padding: '40px' }}>
@@ -80,19 +75,19 @@ export default function ProductForYou() {
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
               }}
-              image={product.image}
-              title={product.title}
+              image={product.imagemUrl}
+              title={product.name}
             />
             <CardContent>
               <Typography
                 variant="body2"
                 sx={{ color: 'text.secondary' }}>
-                {product.description}
+                {product.description.length > 80  ? product.description.slice(0, 70) + "..."  : product.description}
               </Typography>
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
                 <Typography sx={{ color: 'black', fontWeight: 'bold', fontSize: '1.5rem' }}>
-                  {product.price}
+                  R${parseFloat(product.price).toFixed(2).replace('.', ',')}
                 </Typography>
                 <Typography
                   sx={{
@@ -127,7 +122,7 @@ export default function ProductForYou() {
                     color: 'black',
                   },
                 }}>
-                <span style={{ fontSize: '12px' }}>Adicionar ao Carrinho</span>
+                <span style={{ fontSize: '12px' }} >Adicionar ao Carrinho</span>
               </Button>
             </CardActions>
           </Card>
