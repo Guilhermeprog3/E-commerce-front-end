@@ -7,7 +7,9 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('@Auth:token') || null);
   const [user, setUser] = useState(null)
-  const [signed, setSigned] = useState(false);
+
+  const signed = !!token;
+
 
   const isValidToken = (token) => {
     if (!token) return false;
@@ -41,7 +43,6 @@ export const AuthProvider = ({ children }) => {
       if (storedToken && isValidToken(storedToken)) {
         setToken(storedToken);
         axiosClient.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
-        setSigned(true);
       } else {
 
         signOut();
@@ -64,7 +65,6 @@ export const AuthProvider = ({ children }) => {
           setToken(accessToken);
           axiosClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
           localStorage.setItem('@Auth:token', accessToken);
-          setSigned(true);
         } else {
           alert("Token inválido ou expirado.");
           signOut();
@@ -79,7 +79,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('@Auth:token');
     setToken(null);
     setUser(null);
-    setSigned(false);
     delete axiosClient.defaults.headers.common['Authorization'];
   };
 
@@ -96,3 +95,4 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
