@@ -6,10 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
-import { GetProdutosForYou } from '../../../server/api';
+import { GetProdutosForYou, PatchCart, PostCart } from '../../../server/api';
 import CircularIndeterminate from '../circularIndeterminate';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, setCartId  } from '../../../redux/cart/slice.js';
+import { AuthContext } from '../../../context/authContext.jsx'
 
 export default function ProductForYou() {
   const [products, setProducts] = React.useState([])
@@ -17,7 +18,9 @@ export default function ProductForYou() {
   const [error, setError] = React.useState(false)
   const [messageError, setMessageError] = React.useState('')
   const dispatch = useDispatch();
-  const { cartId, items } = useSelector((state) => state.cart);
+  const { cartId, items} = useSelector((state) => state.cart);
+  const { user } = React.useContext(AuthContext);
+
   
   React.useEffect(() =>{
     setLoading(true)
@@ -47,34 +50,29 @@ export default function ProductForYou() {
   }
 
   const handleAddToCart = async (product) => {
-  const dispatch = useDispatch();
-  const { cartId, items, userId } = useSelector((state) => state.cart);
-
   if (!cartId) {
     try {
       const response = await PostCart({
-        userId: userId, // Passando o userId para a criação do carrinho
-        products: [{ productId: product.productId, quantity: 1 }] // Adicionando o primeiro produto
+        userId: user.userName, 
+        products: [{ productId: product.id, quantity: 1 }] 
       });
-      dispatch(setCartId(response.data.cartId)); 
+      console.log(response)
+      dispatch(setCartId(response.data.id));
     } catch (error) {
       console.error("Erro ao criar o carrinho:", error);
-      return; // Saia da função se houver erro
+      return; 
     }
   } else {
-    // Se o carrinho já existe, atualiza com o novo produto
     try {
       await PatchCart(cartId, {
-        products: [...items, { productId: product.productId, quantity: 1 }]
+        products: [...items, { productId: product.id, quantity: 1 }]
       });
     } catch (error) {
       console.error("Erro ao atualizar o carrinho:", error);
-      return; // Saia da função se houver erro
+      return; 
     }
   }
-
-  // Após a criação ou atualização do carrinho, adiciona o item ao estado do Redux
-  dispatch(addItemToCart({ userId, productId: product.productId, quantity: 1 }));
+  dispatch(addItemToCart({ productId: product.id, quantity: 1 }));
 };
 
   return (
@@ -156,7 +154,7 @@ export default function ProductForYou() {
                     color: 'black',
                   },
                 }}>
-                <span style={{ fontSize: '12px' }} onClick={() => handleProductClick(product.id)}>Adicionar ao Carrinho</span>
+                <span style={{ fontSize: '12px' }} onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</span>
               </Button>
             </CardActions>
           </Card>

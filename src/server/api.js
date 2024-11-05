@@ -17,12 +17,17 @@ export async function GetProdutosForYou() {
   return response
 }
 
-export async function PostCart() {
-  const response = await axiosClient.post("/carrinhos")
+export async function GetCart(id) {
+  const response = await axiosClient.get(`/carrinhos/${id}`)
+  return response
+}
+
+export async function PostCart(cart) {
+  const response = await axiosClient.post("/carrinhos", cart)
   return response
 }
 
 export async function PatchCart(id) {
-  const response = await axiosClient.patch("/carrinhos/${id}")
+  const response = await axiosClient.patch(`/carrinhos/${id}`)
   return response
 }
