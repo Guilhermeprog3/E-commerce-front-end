@@ -85,9 +85,9 @@ export default function OrderReview({ arrayProduct, productsStore }) {
           Revisão do Pedido
         </Typography>
         <Box sx={{ marginLeft: { sm: '17%', lg: '1%', md: '0%' }, marginTop: { sm: '10%' } }}>
-          {dataProducts.map((product, index) => (
+          {dataProducts.map((product) => (
             <Box
-              key={index}
+              key={product.id}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -171,6 +171,7 @@ export default function OrderReview({ arrayProduct, productsStore }) {
               </Box>
             </Box>
           ))}
+
 
           <Typography
             variant="h6"

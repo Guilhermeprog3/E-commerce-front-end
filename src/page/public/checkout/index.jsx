@@ -17,6 +17,7 @@ function Checkout() {
   useEffect(() => {
     try {
       setCartItemsData(products);
+      console.log(products)
     } catch (error) {
       console.error("Erro ao analisar os dados do carrinho:", error);
       setError("Erro ao carregar os dados do carrinho.");
@@ -34,7 +35,7 @@ function Checkout() {
         <Grid item xs={8.5} lg={6.6}>
           <Grid container spacing={2} direction="column">
             {cartItemsData.map((item, index) => (
-              <Grid item key={index}>
+              <Grid item key={item.productId}>
                 <CustomCard product={item} />
               </Grid>
             ))}

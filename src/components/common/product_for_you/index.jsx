@@ -6,9 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
-import { GetProdutosForYou, PatchCart, PostCart } from '../../../server/api';
+import { GetProdutosForYou } from '../../../server/api';
 import CircularIndeterminate from '../circularIndeterminate';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../../redux/cart/slice.js';
 import { AuthContext } from '../../../context/authContext.jsx'
 

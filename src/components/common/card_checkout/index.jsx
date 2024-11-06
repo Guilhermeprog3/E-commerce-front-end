@@ -20,19 +20,19 @@ export default function CustomCard({ product }) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    setLoading(true);
     const response = GetProduct(product.productId)
-    response.then((dados) => {
-      setDataProducts(dados.data);
-    })
+      .then((dados) => {
+        setDataProducts(dados.data);
+      })
       .catch((erro) => {
-        setMessageError(erro)
         setError("Erro ao carregar o carrinho");
-        console.error(error);
+        console.error(erro);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [product.productId]);
 
   if (loading) {
     return (
@@ -40,10 +40,11 @@ export default function CustomCard({ product }) {
     );
   }
 
-  const hadleDeleteProduct = (id) => {
+  const handleDeleteProduct = (id) => {
+    if (isDeleted) return;
     dispatch(removeProduct({ productId: id }));
     setIsDeleted(true);
-  }
+  };
 
   if (isDeleted) {
     return null;
@@ -109,7 +110,7 @@ export default function CustomCard({ product }) {
           alignSelf: { xs: 'center', md: 'center' },
           marginTop: { xs: '1%', md: 0 }
         }}
-        onClick={() => hadleDeleteProduct(dataProducts.id)}
+        onClick={() => handleDeleteProduct(dataProducts.id)}
       >
         <DeleteIcon sx={{ fontSize: { sm: '2.5rem', md: '3rem', } }} /> {/* Aumenta o ícone em sm e md */}
       </IconButton>
