@@ -12,6 +12,12 @@ export async function PostProduto(produto) {
   return response
 }
 
+export async function GetProduto(id) {
+  const response = await axiosClient.get(`/produtos/${id}`)
+
+  return response
+}
+
 export async function GetProdutosForYou() {
   const response = await axiosClient.get("/produtos?page=1&pageSize=4")
   return response

@@ -9,7 +9,7 @@ import { Box } from '@mui/material';
 import { GetProdutosForYou, PatchCart, PostCart } from '../../../server/api';
 import CircularIndeterminate from '../circularIndeterminate';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, setCartId  } from '../../../redux/cart/slice.js';
+import { addItemToCart, setCartId } from '../../../redux/cart/slice.js';
 import { AuthContext } from '../../../context/authContext.jsx'
 
 export default function ProductForYou() {
@@ -18,18 +18,18 @@ export default function ProductForYou() {
   const [error, setError] = React.useState(false)
   const [messageError, setMessageError] = React.useState('')
   const dispatch = useDispatch();
-  const { cartId, items} = useSelector((state) => state.cart);
+  const { cartId } = useSelector((state) => state.cart);
   const { user } = React.useContext(AuthContext);
 
-  
-  React.useEffect(() =>{
+
+  React.useEffect(() => {
     setLoading(true)
     const response = GetProdutosForYou()
     response.then(
-      (dados) =>{
+      (dados) => {
         setProducts(dados.data.data)
-      } 
-    ).catch((erro) =>{
+      }
+    ).catch((erro) => {
       setMessageError(erro)
       setError(true)
     }).finally(() => {
@@ -37,43 +37,43 @@ export default function ProductForYou() {
     })
   }, [])
 
-    if (loading) {
+  if (loading) {
     return (
-      <CircularIndeterminate/>
+      <CircularIndeterminate />
     );
   }
-  
-    if (error) {
+
+  if (error) {
     return (
       <p>{messageError}</p>
     );
   }
 
   const handleAddToCart = async (product) => {
-  if (!cartId) {
-    try {
-      const response = await PostCart({
-        userId: user.userName, 
-        products: [{ productId: product.id, quantity: 1 }] 
-      });
-      console.log(response)
-      dispatch(setCartId(response.data.id));
-    } catch (error) {
-      console.error("Erro ao criar o carrinho:", error);
-      return; 
+    if (!cartId) {
+      try {
+        const response = await PostCart({
+          userId: user.id,
+          products: [{ productId: product.id, quantity: 1 }]
+        });
+        console.log(response.data.id)
+        dispatch(addItemToCart({ userId: user.id, cartId: response.data.id, productId: product.id, quantity: 1 }));
+      } catch (error) {
+        console.error("Erro ao criar o carrinho:", error);
+        return;
+      }
+    } else {
+      try {
+        const response = await PatchCart(cartId, {
+          products: [{ productId: product.id, quantity: 1 }]
+        });
+        dispatch(addItemToCart({ userId: user.id, cartId: response.data.id, productId: product.id, quantity: 1 }));
+      } catch (error) {
+        console.error("Erro ao atualizar o carrinho:", error);
+        return;
+      }
     }
-  } else {
-    try {
-      await PatchCart(cartId, {
-        products: [...items, { productId: product.id, quantity: 1 }]
-      });
-    } catch (error) {
-      console.error("Erro ao atualizar o carrinho:", error);
-      return; 
-    }
-  }
-  dispatch(addItemToCart({ productId: product.id, quantity: 1 }));
-};
+  };
 
   return (
     <Box sx={{ padding: '40px' }}>
@@ -114,7 +114,7 @@ export default function ProductForYou() {
               <Typography
                 variant="body2"
                 sx={{ color: 'text.secondary' }}>
-                {product.description.length > 80  ? product.description.slice(0, 70) + "..."  : product.description}
+                {product.description.length > 80 ? product.description.slice(0, 70) + "..." : product.description}
               </Typography>
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
