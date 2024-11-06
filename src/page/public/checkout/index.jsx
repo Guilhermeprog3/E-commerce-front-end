@@ -3,45 +3,25 @@ import { Grid } from '@mui/material';
 import ContainedButtons from '../../../components/common/button_voltar';
 import OrderReview from '../../../components/common/checkout_revisão';
 import PrimarySearchAppBar from '../../../components/common/navbar_ckeckout';
-import { GetCart } from '../../../server/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import CircularIndeterminate from '../../../components/common/circularIndeterminate';
+import { clearCart, selectCartProducts } from '../../../redux/cart/slice';
 
 function Checkout() {
-  //   const cardCount = 3; // quantidade de cards na tela
   const dispatch = useDispatch();
-  const { cartId, products } = useSelector((state) => state.cart);
-  const [cartData, setCartData] = useState([]);
   const [cartItemsData, setCartItemsData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const cartProducts = useSelector(selectCartProducts);
+  const products = cartProducts.payload.cart.products
 
   useEffect(() => {
-    // if (!cartId) return;
-
-    setLoading(true);
-
-    const response = GetCart(cartId)
-    response.then((dados) => {
-      setCartData(dados.data);
-      setCartItemsData(dados.data.CartItems)
-    })
-      .catch((error) => {
-        setError("Erro ao carregar o carrinho");
-        console.error(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-
-  if (loading) {
-    return (
-      <CircularIndeterminate />
-    );
-  }
+    try {
+      setCartItemsData(products);
+    } catch (error) {
+      console.error("Erro ao analisar os dados do carrinho:", error);
+      setError("Erro ao carregar os dados do carrinho.");
+    }
+  }, [cartProducts]);
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -50,8 +30,7 @@ function Checkout() {
   return (
     <div>
       <PrimarySearchAppBar />
-      <Grid container spacing={0} sx={{ marginTop: '8rem', }}>
-        {/* Grid para os cartões */}
+      <Grid container spacing={0} sx={{ marginTop: '8rem' }}>
         <Grid item xs={8.5} lg={6.6}>
           <Grid container spacing={2} direction="column">
             {cartItemsData.map((item, index) => (
@@ -64,14 +43,11 @@ function Checkout() {
         </Grid>
 
         <Grid item xs={9} sm={4} lg={3} md={1} sx={{ flexDirection: 'column' }}>
-          <OrderReview />
-
+          <OrderReview arrayProduct={cartItemsData} productsStore={products} />
         </Grid>
       </Grid>
 
-      <div >
-
-      </div>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }

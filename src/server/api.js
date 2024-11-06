@@ -12,7 +12,7 @@ export async function PostProduto(produto) {
   return response
 }
 
-export async function GetProduto(id) {
+export async function GetProduct(id) {
   const response = await axiosClient.get(`/produtos/${id}`)
 
   return response

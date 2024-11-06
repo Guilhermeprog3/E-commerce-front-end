@@ -7,18 +7,21 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { GetProduto } from '../../../server/api';
+import { GetProduct } from '../../../server/api';
 import CircularIndeterminate from '../circularIndeterminate';
+import { useDispatch } from 'react-redux';
+import { removeProduct } from '../../../redux/cart/slice';
 
 export default function CustomCard({ product }) {
-  const [dataProducts, setDataProducts] = React.useState(null);
+  const [dataProducts, setDataProducts] = React.useState([]);
   const [error, setError] = React.useState(false)
   const [loading, setLoading] = React.useState(false);
+  const [isDeleted, setIsDeleted] = React.useState(false);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const response = GetProduto(product.productId)
+    const response = GetProduct(product.productId)
     response.then((dados) => {
-      console.log(dados);
       setDataProducts(dados.data);
     })
       .catch((erro) => {
@@ -35,6 +38,15 @@ export default function CustomCard({ product }) {
     return (
       <CircularIndeterminate />
     );
+  }
+
+  const hadleDeleteProduct = (id) => {
+    dispatch(removeProduct({ productId: id }));
+    setIsDeleted(true);
+  }
+
+  if (isDeleted) {
+    return null;
   }
 
   return (
@@ -86,7 +98,7 @@ export default function CustomCard({ product }) {
               fontSize: { sm: '1.25rem', md: '1rem', lg: '1rem' } // Aumenta a fonte do botão em sm e md
             }}
           >
-            R$ {dataProducts.price}
+            R${parseFloat(dataProducts.price).toFixed(2).replace('.', ',')}
           </Button>
         </CardContent>
       </Box>
@@ -97,6 +109,7 @@ export default function CustomCard({ product }) {
           alignSelf: { xs: 'center', md: 'center' },
           marginTop: { xs: '1%', md: 0 }
         }}
+        onClick={() => hadleDeleteProduct(dataProducts.id)}
       >
         <DeleteIcon sx={{ fontSize: { sm: '2.5rem', md: '3rem', } }} /> {/* Aumenta o ícone em sm e md */}
       </IconButton>
