@@ -1,9 +1,27 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useMemo } from 'react';
-import { PrivateRoutesPath, RoutesPath } from './routespath';
+import { AdminRoutesPath, PrivateRoutesPath, RoutesPath } from './routespath';
 import { PrivateRoute } from './PrivateRoutes';
 
 export const RouterManager = () => {
+  const adminRoutes = useMemo(
+    () =>
+      Object.keys(AdminRoutesPath).map((path) => {
+        const RouteComponent = AdminRoutesPath[path];
+        return (
+          <Route
+            key={path}
+            element={<PrivateRoute requiredRole={["ADMIN"]} />}>
+            <Route
+              path={path}
+              element={<RouteComponent />}
+            />
+          </Route>
+        );
+      }),
+    []
+  );
+
   const privateRoutes = useMemo(
     () =>
       Object.keys(PrivateRoutesPath).map((path) => {
@@ -11,7 +29,7 @@ export const RouterManager = () => {
         return (
           <Route
             key={path}
-            element={<PrivateRoute />}>
+            element={<PrivateRoute requiredRole={["USER", "ADMIN"]} />}>
             <Route
               path={path}
               element={<RouteComponent />}
@@ -40,6 +58,7 @@ export const RouterManager = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {adminRoutes}
         {privateRoutes}
         {publicRoutes}
       </Routes>
