@@ -11,8 +11,50 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import { GetProdutos } from '../../../server/api';
+import CircularIndeterminate from '../circularIndeterminate';
 
-function ProductRow({ products, rowId }) {
+function ProductRow({ rowId }) {
+  const [products, setProducts] = useState([])
+  const [page, setPage] = useState(1)
+  const [pageSize] = useState(8)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [messageError, setMessageError] = useState('')
+
+  React.useEffect(() => {
+    setLoading(true)
+    if (rowId == 1) {
+      setPage(1)
+    } else if (rowId == 2) {
+      setPage(2)
+    } else if (rowId == 3) {
+      setPage(3)
+    }
+    const response = GetProdutos(page, pageSize)
+    response.then(
+      (dados) => {
+        setProducts(dados.data.data)
+      }
+    ).catch((erro) => {
+      setMessageError(erro)
+      setError(true)
+    }).finally(() => {
+      setLoading(false)
+    })
+  }, [])
+
+  if (loading) {
+    return (
+      <CircularIndeterminate />
+    );
+  }
+
+  if (error) {
+    return (
+      <p>{messageError}</p>
+    );
+  }
   return (
     <Box sx={{ position: 'relative', padding: '40px' }}>
       <Swiper
@@ -52,7 +94,7 @@ function ProductRow({ products, rowId }) {
                   backgroundColor: '#8B96A5',
                 }}>
                 <img
-                  src={product.image}
+                  src={product.imagemUrl}
                   alt={product.title}
                   style={{
                     width: '60%',
@@ -69,7 +111,7 @@ function ProductRow({ products, rowId }) {
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
                   <Typography sx={{ color: 'black', fontWeight: 'bold', fontSize: '1.5rem' }}>
-                    {product.price}
+                    R$ {parseFloat(product.price).toFixed(2).replace('.', ',')}
                   </Typography>
                   <Typography
                     sx={{
@@ -126,247 +168,18 @@ function ProductRow({ products, rowId }) {
 }
 
 export default function Product() {
-  const productsGroup1 = [
-    {
-      id: 1,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-
-    {
-      id: 2,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 7.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 3,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 6.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 4,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 5.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 5,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 6,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 7,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 8,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-  ];
-
-  const productsGroup2 = [
-    {
-      id: 9,
-      title: 'Samsung Galaxy S23 Ultra',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 7.500,00',
-      oldPrice: 'R$ 8.500,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-
-    {
-      id: 10,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 11,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 12,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 13,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 14,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 15,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 16,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-  ];
-
-  const productsGroup3 = [
-    {
-      id: 17,
-      title: 'Google Pixel 8',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 5.000,00',
-      oldPrice: 'R$ 6.000,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 18,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 19,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 20,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 21,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 22,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 23,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-    {
-      id: 24,
-      title: 'Apple iPhone 15 Pro Max 256GB',
-      description:
-        'Celular versátil com suporte para 5G e sistema de câmeras de alta qualidade. Experimente velocidades ultrarápidas e uma interface intuitiva para fácil navegação',
-      price: 'R$ 8.000,00',
-      oldPrice: 'R$ 9.300,00',
-      image: 'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_118387654/fee_786_587_png',
-    },
-  ];
 
   return (
     <div>
       <h2 style={{ color: '#4B5563', marginLeft: '45px' }}>Smartphones Premium</h2>
 
       <ProductRow
-        products={productsGroup1}
         rowId={1}
       />
       <ProductRow
-        products={productsGroup2}
         rowId={2}
       />
       <ProductRow
-        products={productsGroup3}
         rowId={3}
       />
     </div>

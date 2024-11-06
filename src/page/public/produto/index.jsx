@@ -8,32 +8,32 @@ import FilterComponent from '../../../components/common/barra_lateral';
 import ItemCountBar from '../../../components/common/barra_superior';
 
 function Produto() {
-  
+
   const products = Array(6).fill({});
 
   return (
     <div>
       <PrimarySearchAppBar />
 
-      <Box sx={{marginTop:{lg:'7%',sm:'10%',xs:'20%'}}}>
-        <ItemCountBar/>
+      <Box sx={{ marginTop: { lg: '7%', sm: '10%', xs: '20%' } }}>
+        <ItemCountBar />
       </Box>
 
       <Container
         sx={{
-          marginLeft:{lg:'10.3%',xl:'20.5%',md:'-4%',sm:'30%',xs:'28%'},
+          marginLeft: { lg: '10.3%', xl: '20.5%', md: '-4%', sm: '30%', xs: '28%' },
           marginTop: '2%',
           display: 'flex',
-          width:{lg:'90%',md:'103%',xs:'72%',sm:'70%'}
-          
+          width: { lg: '90%', md: '103%', xs: '72%', sm: '70%' }
+
         }}
       >
-        
-        <Box sx={{ flex: 1, marginLeft:{lg:'-13%',md:'4%',xl:'-29%',xs:'-50%'},marginRight:{lg:'7%',sm:"2%",md:'5%',xs:'-5%'} }}>
+
+        <Box sx={{ flex: 1, marginLeft: { lg: '-13%', md: '4%', xl: '-29%', xs: '-50%' }, marginRight: { lg: '7%', sm: "2%", md: '5%', xs: '-5%' } }}>
           <FilterComponent />
         </Box>
 
-        
+
         <Box sx={{ flex: 3, }}>
           <Grid container spacing={2}>
             {products.map((product, index) => (
@@ -43,15 +43,15 @@ function Produto() {
             ))}
           </Grid>
 
-         
+
           <Box
             sx={{
               position: 'relative',
-              marginTop:{lg:'5%',xs:'15%',sm:'8%'},
-              marginBottom:{lg:'5%',xs:'15%',sm:'8%'},
+              marginTop: { lg: '5%', xs: '15%', sm: '8%' },
+              marginBottom: { lg: '5%', xs: '15%', sm: '8%' },
               display: 'flex',
               justifyContent: 'center',
-              marginLeft:'50%'
+              marginLeft: '50%'
             }}
           >
             <PaginationRounded />

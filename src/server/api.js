@@ -18,6 +18,11 @@ export async function GetProduct(id) {
   return response
 }
 
+export async function GetProdutos(page, pageSize) {
+  const response = await axiosClient.get(`/produtos?page=${page}&pageSize=${pageSize}`)
+  return response
+}
+
 export async function GetProdutosForYou() {
   const response = await axiosClient.get("/produtos?page=1&pageSize=4")
   return response
