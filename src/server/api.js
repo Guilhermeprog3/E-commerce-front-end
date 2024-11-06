@@ -12,12 +12,28 @@ export async function PostProduto(produto) {
   return response
 }
 
+export async function GetProduct(id) {
+  const response = await axiosClient.get(`/produtos/${id}`)
+
+  return response
+}
+
 export async function GetProdutosForYou() {
   const response = await axiosClient.get("/produtos?page=1&pageSize=4")
   return response
 }
 
-export async function PostCart() {
-  const response = await axiosClient.post("/carrinhos")
+export async function GetCart(id) {
+  const response = await axiosClient.get(`/carrinhos/${id}`)
+  return response
+}
+
+export async function PostCart(cart) {
+  const response = await axiosClient.post("/carrinhos", cart)
+  return response
+}
+
+export async function PatchCart(id) {
+  const response = await axiosClient.patch(`/carrinhos/${id}`)
   return response
 }

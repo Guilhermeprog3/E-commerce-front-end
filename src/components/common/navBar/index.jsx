@@ -16,6 +16,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom'; // Para redirecionamento
 import { AuthContext } from '../../../context/authContext'; // Contexto de autenticação
+import { useSelector } from 'react-redux';
+import { selectCartProducts } from '../../../redux/cart/slice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -81,6 +83,10 @@ export default function PrimarySearchAppBar() {
     navigate('/'); // Redireciona para a tela de login
   };
 
+  const cartProducts = useSelector(selectCartProducts);
+  const products = cartProducts.payload.cart.products
+  const totalItems = products.length
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -127,9 +133,13 @@ export default function PrimarySearchAppBar() {
             <IconButton
               size="large"
               edge="end"
-              aria-label="account of current user"
-              color="inherit">
-              <ShoppingCartIcon />
+              aria-label="show cart items"
+              color="inherit"
+              onClick={() => { navigate("/carrinho"); }}
+            >
+              <Badge badgeContent={totalItems} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
             </IconButton>
             <IconButton
               size="large"

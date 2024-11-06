@@ -8,21 +8,27 @@ import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import { GetProdutosForYou } from '../../../server/api';
 import CircularIndeterminate from '../circularIndeterminate';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../../redux/cart/slice.js';
+import { AuthContext } from '../../../context/authContext.jsx'
 
 export default function ProductForYou() {
   const [products, setProducts] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
   const [messageError, setMessageError] = React.useState('')
-  
-  React.useEffect(() =>{
+  const dispatch = useDispatch();
+  const { user } = React.useContext(AuthContext);
+
+
+  React.useEffect(() => {
     setLoading(true)
     const response = GetProdutosForYou()
     response.then(
-      (dados) =>{
+      (dados) => {
         setProducts(dados.data.data)
-      } 
-    ).catch((erro) =>{
+      }
+    ).catch((erro) => {
       setMessageError(erro)
       setError(true)
     }).finally(() => {
@@ -30,18 +36,21 @@ export default function ProductForYou() {
     })
   }, [])
 
-    if (loading) {
+  if (loading) {
     return (
-      <CircularIndeterminate/>
+      <CircularIndeterminate />
     );
   }
-  
-    if (error) {
+
+  if (error) {
     return (
       <p>{messageError}</p>
     );
   }
 
+  const handleAddToCart = (product) => {
+    dispatch(addItemToCart({ userId: user.id, productId: product.id, quantity: 1 }));
+  };
 
   return (
     <Box sx={{ padding: '40px' }}>
@@ -82,7 +91,7 @@ export default function ProductForYou() {
               <Typography
                 variant="body2"
                 sx={{ color: 'text.secondary' }}>
-                {product.description.length > 80  ? product.description.slice(0, 70) + "..."  : product.description}
+                {product.description.length > 80 ? product.description.slice(0, 70) + "..." : product.description}
               </Typography>
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
@@ -122,7 +131,7 @@ export default function ProductForYou() {
                     color: 'black',
                   },
                 }}>
-                <span style={{ fontSize: '12px' }} >Adicionar ao Carrinho</span>
+                <span style={{ fontSize: '12px' }} onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</span>
               </Button>
             </CardActions>
           </Card>
