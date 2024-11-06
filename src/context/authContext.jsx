@@ -6,7 +6,11 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('@Auth:token') || null);
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('@Auth:user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
 
   const signed = !!token;
 
@@ -29,6 +33,7 @@ export const AuthProvider = ({ children }) => {
         return false;
       }
       setUser(decoded);
+      localStorage.setItem('@Auth:user', JSON.stringify(decoded));
       return true;
     } catch (error) {
       console.error("Erro ao decodificar o token:", error);
@@ -77,6 +82,7 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = () => {
     localStorage.removeItem('@Auth:token');
+    localStorage.removeItem('@Auth:user');
     setToken(null);
     setUser(null);
     delete axiosClient.defaults.headers.common['Authorization'];
