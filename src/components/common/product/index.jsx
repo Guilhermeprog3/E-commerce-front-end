@@ -80,10 +80,10 @@ function ProductRow({ rowId }) {
         modules={[Navigation]}
         style={{ paddingBottom: '20px' }}
         breakpoints={{
-          0: { slidesPerView: 1, slidesPerGroup: 1 },
-          600: { slidesPerView: 2, slidesPerGroup: 2 },
-          900: { slidesPerView: 3, slidesPerGroup: 3 },
-          1200: { slidesPerView: 4, slidesPerGroup: 4 },
+          480: { slidesPerView: 1.5, slidesPerGroup: 1 },
+          768: { slidesPerView: 3, slidesPerGroup: 2 },
+          1024: { slidesPerView: 4, slidesPerGroup: 3 },
+          1440: { slidesPerView: 5, slidesPerGroup: 4 },
         }}>
         {products.map((product) => (
           <SwiperSlide key={product.id}>
@@ -91,27 +91,26 @@ function ProductRow({ rowId }) {
               sx={{
                 border: '1px solid #e0e0e0',
                 width: '290px',
+                height: '400px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}>
+
               <Box
                 sx={{
                   width: '100%',
-                  height: 150,
-                  objectFit: 'contain',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#8B96A5',
-                }}>
-                <img
+                  height: '200px',
+                }}
+              >
+                <Box
+                  component={'img'}
                   src={product.imagemUrl}
-                  alt={product.title}
+                  alt={product.name}
                   style={{
-                    width: '60%',
+                    width: '100%',
                     height: '100%',
-                    objectFit: 'contain',
+                    objectFit: 'contain'
                   }}
                 />
               </Box>
