@@ -2,10 +2,9 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { GetProdutosForYou } from '../../../server/api';
 import CircularIndeterminate from '../circularIndeterminate';
 import { useDispatch } from 'react-redux';
@@ -19,6 +18,9 @@ export default function ProductForYou() {
   const [messageError, setMessageError] = React.useState('')
   const dispatch = useDispatch();
   const { user } = React.useContext(AuthContext);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 
   React.useEffect(() => {
@@ -58,35 +60,43 @@ export default function ProductForYou() {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between', // Espaço entre os cards
-          flexWrap: 'wrap', // Permite que os cards quebrem de linha em telas menores
-          gap: '20px', // Espaçamento entre os cards
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '20px',
         }}>
         {products.map((product) => (
           <Card
             key={product.id}
             sx={{
-              width: 'calc(25% - 20px)', // Cada card ocupa 25% da largura com margem
-              minWidth: '250px', // Define uma largura mínima para telas menores
+              width: isMobile ? '100%' : 'calc(25% - 20px)',
+              minWidth: '250px',
               border: '1px solid #e0e0e0',
-              height: '100%', // Garante que o card ocupe a altura total
+              height: '400px',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between', // Distribui o conteúdo do card
+              justifyContent: 'space-between',
             }}>
-            <CardMedia
+
+            <Box
               sx={{
                 width: '100%',
-                height: 150,
-                objectFit: 'contain',
-                backgroundColor: '#8B96A5',
-                backgroundSize: '60%',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
+                height: '200px',
               }}
-              image={product.imagemUrl}
-              title={product.name}
-            />
+            >
+              <Box
+                component={'img'}
+                src={product.imagemUrl}
+                alt={product.name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+              />
+            </Box>
+
+
+
             <CardContent>
               <Typography
                 variant="body2"
