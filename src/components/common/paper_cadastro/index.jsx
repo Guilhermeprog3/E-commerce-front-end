@@ -60,7 +60,7 @@ const P_Cadastro = () => {
       if (response.status === 201 || response.status === 200) {
         setSuccessMessage('Cadastro realizado com sucesso!');
         // Redireciona para a página de login
-        navigate('/login');
+        navigate('/');
       }
     } catch (error) {
       // Captura qualquer erro de rede ou API
