@@ -107,7 +107,7 @@ export default function PrimarySearchAppBar() {
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}>
-            MUI
+            E-commerce
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -120,16 +120,6 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit">
-              <Badge
-                badgeContent={17}
-                color="error">
-                <FavoriteIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               size="large"
               edge="end"
@@ -158,8 +148,7 @@ export default function PrimarySearchAppBar() {
         onClose={handleMenuClose}
         sx={{ mt: '5px', ml: '15px' }}>
         <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
-        <MenuItem onClick={handleLogout}>Sair</MenuItem> {/* Botão de Sair */}
+        <MenuItem onClick={handleLogout}>Sair</MenuItem>
       </Menu>
       <Menu
         anchorEl={menuAnchorEl}
