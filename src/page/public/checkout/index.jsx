@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { clearCart, selectCartProducts } from '../../../redux/cart/slice';
 
 function Checkout() {
-  const dispatch = useDispatch();
   const [cartItemsData, setCartItemsData] = useState([]);
   const [error, setError] = useState(null);
   const cartProducts = useSelector(selectCartProducts);
@@ -24,9 +23,6 @@ function Checkout() {
     }
   }, [cartProducts]);
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
 
   return (
     <div>
