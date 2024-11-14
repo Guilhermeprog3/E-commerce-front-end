@@ -99,7 +99,6 @@ export default function UserProfileForm() {
     }
 
     setFormData_perfil(updatedFormData);
-    console.log(updatedFormData);
   };
 
   const handleInputCreateEndereco = (event) => {
@@ -139,19 +138,12 @@ export default function UserProfileForm() {
 
   const handleSubmit = async () => {
     try {
-      console.log(formData_user)
-
-
       let formDataEndWithoutIdUser = new FormData();
       formDataEndWithoutIdUser.append("name", formData_user.name);
       formDataEndWithoutIdUser.append("password", formData_user.password);
 
       if (formData_user.avatar instanceof File) {
         formDataEndWithoutIdUser.append("file", formData_user.avatar);
-      }
-
-      for (let [key, value] of formDataEndWithoutIdUser.entries()) {
-        console.log(key, value);
       }
 
       const { idUserProfile, ...formDataEndWithoutIdProfile } = formData_perfil[0];
@@ -175,7 +167,6 @@ export default function UserProfileForm() {
   const handleSubmitProfile = () => {
     try {
       const response = PostPf(formData_perfil[0]);
-      console.log(response)
       setSuccessMessage('Perfil criado com sucesso!');
     } catch (error) {
       setErrorMessage('Erro ao atualizar dados.');
