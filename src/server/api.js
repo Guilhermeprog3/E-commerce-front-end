@@ -55,27 +55,47 @@ export async function PostUser(data) {
 }
 
 export async function GetUser(id) {
-  const response = await axiosClient.get(`/usuarios/${id}`);
-
-
-  return response.data;
+  const token = localStorage.getItem('@Auth:token');
+  const response = await axiosClient.get(`/usuarios/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return response;
 }
 
 export async function PatchUser(data, id) {
-
-  const response = await axiosClient.patch(`/usuarios/${id}`, data,);
+  const response = await axiosClient.patch(`/usuarios/${id}`, data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    }
+  );
   return response.data;
 }
 
-export async function PostEnd(data, id) {
-  const response = await axiosClient.post(`/enderecos/${id}`, data,);
-  return response.data
+export async function PostEnd(data) {
+  const token = localStorage.getItem('@Auth:token');
+
+  const response = await axiosClient.post("/enderecos", data,
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    }
+  );
+  return response;
 
 }
 
 export async function GetEnd(id) {
-
-  const response = await axiosClient.get(`/enderecos/${id}`,);
+  const token = localStorage.getItem('@Auth:token');
+  const response = await axiosClient.get(`/enderecos/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
   return response.data;
 
 }
@@ -86,15 +106,18 @@ export async function PatchEnd(data, id) {
 
 }
 
-export async function PostPf(data, id) {
-  const response = await axiosClient.post(`/perfis/${id}`, data);
-  return response.data
-
+export async function PostPf(data) {
+  const response = await axiosClient.post(`/perfis`, data);
+  return response
 }
 
 export async function GetPf(id) {
-
-  const response = await axiosClient.get(`/perfis/${id}`);
+  const token = localStorage.getItem('@Auth:token');
+  const response = await axiosClient.get(`/perfis/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
   return response.data;
 
 }
