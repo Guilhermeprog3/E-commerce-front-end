@@ -42,3 +42,87 @@ export async function PatchCart(id) {
   const response = await axiosClient.patch(`/carrinhos/${id}`)
   return response
 }
+
+export async function PostUser(data) {
+  try {
+    const response = await axiosClient.post('/usuarios', data,);
+    return response.data
+  }
+  catch (error) {
+    console.error('Erro ao Criar dados:', error);
+    throw error;
+  }
+}
+
+export async function GetUser(id) {
+  const token = localStorage.getItem('@Auth:token');
+  const response = await axiosClient.get(`/usuarios/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
+export async function PatchUser(data, id) {
+  const response = await axiosClient.patch(`/usuarios/${id}`, data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    }
+  );
+  return response.data;
+}
+
+export async function PostEnd(data) {
+  const token = localStorage.getItem('@Auth:token');
+
+  const response = await axiosClient.post("/enderecos", data,
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    }
+  );
+  return response;
+
+}
+
+export async function GetEnd(id) {
+  const token = localStorage.getItem('@Auth:token');
+  const response = await axiosClient.get(`/enderecos/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return response.data;
+
+}
+
+export async function PatchEnd(data, id) {
+  const response = await axiosClient.patch(`/enderecos/${id}`, data);
+  return response.data;
+
+}
+
+export async function PostPf(data) {
+  const response = await axiosClient.post(`/perfis`, data);
+  return response
+}
+
+export async function GetPf(id) {
+  const token = localStorage.getItem('@Auth:token');
+  const response = await axiosClient.get(`/perfis/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return response.data;
+
+}
+
+export async function PatchPf(data, id) {
+  const response = await axiosClient.patch(`/perfis/${id}`, data,);
+  return response.data;
+}

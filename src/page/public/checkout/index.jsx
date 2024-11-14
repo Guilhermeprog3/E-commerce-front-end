@@ -16,7 +16,6 @@ function Checkout() {
   useEffect(() => {
     try {
       setCartItemsData(products);
-      console.log(products)
     } catch (error) {
       console.error("Erro ao analisar os dados do carrinho:", error);
       setError("Erro ao carregar os dados do carrinho.");

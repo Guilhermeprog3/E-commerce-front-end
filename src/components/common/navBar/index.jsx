@@ -147,7 +147,7 @@ export default function PrimarySearchAppBar() {
         open={isMenuOpen}
         onClose={handleMenuClose}
         sx={{ mt: '5px', ml: '15px' }}>
-        <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+        <MenuItem onClick={() => { navigate("/usuario"); }}>Perfil</MenuItem>
         <MenuItem onClick={handleLogout}>Sair</MenuItem>
       </Menu>
       <Menu
