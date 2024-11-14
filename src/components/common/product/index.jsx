@@ -80,8 +80,8 @@ function ProductRow({ rowId }) {
         modules={[Navigation]}
         style={{ paddingBottom: '20px' }}
         breakpoints={{
-          480: { slidesPerView: 1.5, slidesPerGroup: 1 },
-          768: { slidesPerView: 3, slidesPerGroup: 2 },
+          0: { slidesPerView: 1, slidesPerGroup: 1 },
+          768: { slidesPerView: 2.5, slidesPerGroup: 2 },
           1024: { slidesPerView: 4, slidesPerGroup: 3 },
           1440: { slidesPerView: 5, slidesPerGroup: 4 },
         }}>
