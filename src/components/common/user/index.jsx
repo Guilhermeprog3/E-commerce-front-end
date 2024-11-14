@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   TextField,
   Button,
@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import { PatchUser, PostPf, PostEnd, GetUser, PatchPf, PatchEnd } from '../../../server/api';
 import CircularIndeterminate from '../circularIndeterminate';
 import { AuthContext } from '../../../context/authContext';
-import { useDispatch } from 'react-redux';
 
 export default function UserProfileForm() {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ export default function UserProfileForm() {
   const [createFormData_end, setcreateFormData_end] = useState([]);
   const [formData_perfil, setFormData_perfil] = useState([]);
 
-  const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -134,9 +132,9 @@ export default function UserProfileForm() {
     if (!date) return '';
     const d = new Date(date);
     const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');  // Meses começam de 0
+    const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;  // Formato correto: yyyy-MM-dd
+    return `${year}-${month}-${day}`;
   };
 
   const handleSubmit = async () => {
@@ -159,17 +157,9 @@ export default function UserProfileForm() {
       const { idUserProfile, ...formDataEndWithoutIdProfile } = formData_perfil[0];
       const { idUserAddress, ...formDataEndWithoutIdAddress } = formData_end[0];
 
-      // Executa as requisições assíncronas usando await
       const responseUser = await PatchUser(formDataEndWithoutIdUser, user.id);
-      console.log("User update response:", responseUser);
-
       const responseProfile = await PatchPf(formDataEndWithoutIdProfile, formData_perfil[0].id);
-      console.log("Profile update response:", responseProfile);
-
       const responseEndereco = await PatchEnd(formDataEndWithoutIdAddress, formData_end[0].id);
-      console.log("Address update response:", responseEndereco);
-
-      // Exibe mensagem de sucesso após todas as atualizações
       setSuccessMessage('Dados atualizados com sucesso!');
       setErrorMessage('');
 
