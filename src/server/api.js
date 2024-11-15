@@ -126,3 +126,9 @@ export async function PatchPf(data, id) {
   const response = await axiosClient.patch(`/perfis/${id}`, data,);
   return response.data;
 }
+
+export async function GetProducts(){
+  const response = await axiosClient.get('/produtos')
+  
+  return response
+}

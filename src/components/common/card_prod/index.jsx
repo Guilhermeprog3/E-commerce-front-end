@@ -1,65 +1,101 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, Box, Rating, Divider } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { addItemToCart } from '../../../redux/cart/slice';
+import { useDispatch } from 'react-redux';
+import { AuthContext } from '../../../context/authContext';
 
-function ProductCard() {
-
+function ProductCard({ product }) {
+  const dispatch = useDispatch();
+  const { user } = React.useContext(AuthContext);
   const rating = 4.5;
 
-  return (
-    <Card sx={{
-      maxWidth: 345, 
-      backgroundColor: '#000', 
-      color: '#fff', 
-    }}>
-      <CardMedia
-        component="img"
-        height="180"
-        image="https://img.freepik.com/fotos-premium/mao-segurando-o-smartphone-no-celular-com-fundo-preto-visto-de-perto-ai_985124-6290.jpg"
-        alt="Smartphone"
-      />
+  const handleAddToCart = (id) => {
+    dispatch(addItemToCart({ userId: user.id, productId: id, quantity: 1 }));
+  };
 
-      <Box sx={{ backgroundColor: '#4B5563', padding: '2px', textAlign: 'center' }}>
-        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: '#000', fontSize:{lg:'1.3rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}}>
-          Smartphone Pro Max
+  return (
+    <Card
+      sx={{
+        width: { xs: 250, sm: 250, md: 300, xl:335,lg:280},
+        height: { xs: 400, sm: 450, md: 450,xl:500,lg:430 },
+        backgroundColor: '#000',
+        color: '#fff',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Box
+        sx={{
+          flexGrow: 0.3,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}
+      >
+        <CardMedia
+          component="img"
+          image={product.imagemUrl}
+          alt="Smartphone"
+          style={{
+            aspectRatio: 4 / 3,
+            objectFit: 'contain',
+            maxHeight: '100%',
+          }}
+        />
+      </Box>
+
+      <Box sx={{ backgroundColor: '#4B5563', padding: '8px', textAlign: 'center' }}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            fontWeight: 'bold',
+            color: '#000',
+            fontSize: { xs: '1rem', sm: '1.2rem', lg: '1.3rem' }, // Fontes responsivas
+          }}
+        >
+          {product.name}
         </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '2px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '4px' }}>
           <Typography variant="body1" component="div" sx={{ fontWeight: 'bold', color: '#000' }}>
-            R$ 3.499,00
+            {parseFloat(product.price).toFixed(2).replace('.', ',')}
           </Typography>
-          <Rating 
-            name="rating" 
-            value={rating} 
-            precision={0.5} 
+          <Rating
+            name="rating"
+            value={rating}
+            precision={0.5}
             readOnly
-            sx={{ color: '#FFD700', fontSize:{lg:'1.5rem',xl:'1.5rem',md:'1.5rem',xs:'1rem'}}} 
+            sx={{ color: '#FFD700', fontSize: { xs: '1rem', sm: '1.3rem', lg: '1.5rem' } }} // Responsivo
           />
         </Box>
       </Box>
 
       <Divider sx={{ backgroundColor: '#ccc' }} />
 
-      <CardContent>
+      <CardContent sx={{ flexGrow: 1.7 }}>
         <Typography variant="body2" color="inherit" component="p">
-          Smartphone de última geração com tela AMOLED de 6.5", câmera de 108 MP e bateria de longa duração. 
-          Capture cada momento com detalhes incríveis!
+          {product.description}
         </Typography>
       </CardContent>
 
       <Box display="flex" justifyContent="center" mb={2}>
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           sx={{
-            backgroundColor: '#fff', 
-            color: '#000', 
-            fontWeight: 'bold', 
+            backgroundColor: '#fff',
+            color: '#000',
+            fontWeight: 'bold',
             width: '50%',
-            '&:hover': { 
+            '&:hover': {
               backgroundColor: '#4B5563',
-              color: '#fff'
-            }
+              color: '#fff',
+            },
           }}
           startIcon={<ShoppingCartIcon />}
+          onClick={() => handleAddToCart(product.id)}
         >
           COMPRA
         </Button>
