@@ -6,7 +6,7 @@ export default function FilterComponent() {
   const [price, setPrice] = useState([100, 20000]);
   const [expanded, setExpanded] = useState(false);
   const [rating, setRating] = useState(0);
-  const [mainExpanded, setMainExpanded] = useState(false);
+  const [mainExpanded, setMainExpanded] = useState(true);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -21,7 +21,7 @@ export default function FilterComponent() {
   };
 
   return (
-    <Box sx={{ width:{md:'100%',lg:'110%',xs:'90%',sm:'103%'}, }}>
+    <Box sx={{ width:{md:'130%',lg:'110%',xs:'90%',sm:'133%'},marginLeft:{lg:"32%",xl:"45%",md:"1%",sm:"-40%"} }}>
 
       {/* Accordion principal: Categorias Personalizadas */}
       <Accordion expanded={mainExpanded} onChange={handleMainChange} sx={{ width: '100%' }}>
